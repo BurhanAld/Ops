@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<title>موقع بسيط لعرض الاسم</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  #welcome {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: green;
+  }
+</style>
+</head>
+<body>
+
+<h2>مرحبا بك في الموقع</h2>
+
+<!-- نموذج إدخال الاسم -->
+<div id="formDiv">
+  <label>ادخل اسمك:</label>
+  <input type="text" id="nameInput" placeholder="مثلاً أحمد" />
+  <button onclick="saveName()">حفظ</button>
+</div>
+
+<!-- مكان عرض الاسم -->
+<div id="welcome"></div>
+
+<script>
+// عند تحميل الصفحة، نتحقق إذا كان هناك اسم محفوظ
+window.onload = function() {
+  const storedName = localStorage.getItem('userName');
+  if (storedName) {
+    document.getElementById('welcome').innerText = 'مرحباً، ' + storedName + '!';
+    document.getElementById('formDiv').style.display = 'none'; // نختفى النموذج
+  }
+};
+
+// وظيفة لحفظ الاسم وعرضه
+function saveName() {
+  const name = document.getElementById('nameInput').value.trim();
+  if (name) {
+    localStorage.setItem('userName', name); // نحفظ في التخزين المحلي
+    document.getElementById('welcome').innerText = 'مرحباً، ' + name + '!';
+    document.getElementById('formDiv').style.display = 'none'; // نخفي النموذج بعد الحفظ
+  } else {
+    alert('يرجى إدخال اسم صحيح');
+  }
+}
+</script>
+
+</body>
+</html>
